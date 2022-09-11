@@ -1,7 +1,10 @@
 <script>
   import {dev} from '$app/environment'
+  import {enhance} from '$app/forms'
   export let subject = 'Photography Shoot'
   export let inbox = 'bc9e8bcd4dde63a9a56610d20502ab2b'
+  /** @type {string[]}  */
+  export let blocklist = []
 </script>
 
 <section>
@@ -14,7 +17,25 @@
 </section>
 <section id="contact">
   <div>
-    <form action="https://formsubmit.co/{inbox}" method="POST" id="contactform">
+    <form
+      use:enhance={({data, cancel}) => {
+        const email = `${data.get('email')}`
+        const name = `${data.get('name')}`
+        const message = `${data.get('message')}`
+        const emailContainsBlockedWords = blocklist.some(
+          (blocked) =>
+            email.includes(blocked) || name.includes(blocked) || message.includes(blocked)
+        )
+        if (emailContainsBlockedWords) {
+          console.log('blocked', email)
+          cancel()
+          return
+        }
+      }}
+      action="https://formsubmit.co/{inbox}"
+      method="POST"
+      id="contactform"
+    >
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="Name" />
 

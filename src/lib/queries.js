@@ -1,3 +1,4 @@
+/** @type {(p: string) => string} */
 export function getPhotosQuery(extraFilter) {
   return /* groq */ `*[
     _type == "photo" &&
@@ -23,7 +24,7 @@ export function getJumbotronPhotosQuery() {
     }
   }`
 }
-
+/** @type {(p: string) => string} */
 export function getAlbumsQuery(extraFilter) {
   return /* groq */ `*[
     _type == "album" &&
@@ -35,7 +36,7 @@ export function getAlbumsQuery(extraFilter) {
     cover,
   }`
 }
-
+/** @type {(p: string) => string} */
 export function getAlbumQuery(album) {
   return /* groq */ `*[
     _type == "album" &&
@@ -49,7 +50,7 @@ export function getAlbumQuery(album) {
     splash,
   }`
 }
-
+/** @type {(p: string) => string} */
 export function getPackagesQuery(extraFilter) {
   return /* groq */ `*[
     _type == "package" &&
@@ -63,7 +64,7 @@ export function getPackagesQuery(extraFilter) {
     features
   }`
 }
-
+/** @type {(p: string) => string} */
 export function getPackageQuery(pckg) {
   return /* groq */ `*[
     _type == "package" &&
@@ -98,6 +99,7 @@ export function getSiteQuery() {
     facebookUrl,
     instagramUrl,
     description,
-    keywords
+    keywords,
+    blocklist
   }`
 }

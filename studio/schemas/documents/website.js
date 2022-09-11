@@ -66,6 +66,17 @@ export default {
       options: {
         layout: 'tags'
       }
+    },
+    {
+      name: 'blocklist',
+      type: 'array',
+      title: 'Blocklist',
+      description:
+        "Block emails from using your form. Will match parts. Example: 'crypto' would block 'crypto.user@gmail.com', 'random1@mycryptoacc.com', etc.",
+      of: [{type: 'string'}],
+      options: {
+        layout: 'tags'
+      }
     }
   ]
 }

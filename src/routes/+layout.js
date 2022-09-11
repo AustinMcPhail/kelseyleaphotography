@@ -4,6 +4,7 @@ export const prerender = true
 export async function load({url, fetch}) {
   const siteRes = await fetch(`/site.json`)
   const site = await siteRes.json()
+  console.log('site', site)
 
   return {
     url: url.href,

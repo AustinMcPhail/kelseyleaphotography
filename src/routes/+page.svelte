@@ -19,5 +19,5 @@
     bottomTitle={$siteStore.bio2Title}
     image={$siteStore.bioImage}
   />
-  <Contact />
+  <Contact blocklist={$siteStore.blocklist ?? []} />
 </main>

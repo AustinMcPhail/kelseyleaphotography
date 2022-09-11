@@ -5,6 +5,7 @@
 
   import PackageFeatures from './PackageFeatures.svelte'
   import Contact from './Contact.svelte'
+  import {siteStore} from '$lib/store'
   /** @type {any} */
   export let previewImageOne
   /** @type {any} */
@@ -30,4 +31,4 @@
 {#if faq?.length}
   <FAQ qas={faq} />
 {/if}
-<Contact subject={'Photography Shoot: ' + title} />
+<Contact blocklist={$siteStore.blocklist ?? []} subject={'Photography Shoot: ' + title} />
