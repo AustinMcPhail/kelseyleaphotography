@@ -20,12 +20,12 @@
       </p>
     </div>
   </section>
-  {#if image}
+  {#if image && image.asset}
     <SanityImage classes={'portrait desktop-portrait'} {image} />
   {/if}
   <section class="bio bio-dark" id="bio-travel">
     <div>
-      {#if image}
+      {#if image && image.asset}
         <SanityImage classes={'portrait mobile-portrait'} {image} />
       {/if}
       <p>

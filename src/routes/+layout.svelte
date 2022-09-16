@@ -11,6 +11,7 @@
   export let data
   const url = data.url
   const site = data.site
+  const bioImage = data.bioImage
   $siteStore = site
 </script>
 
@@ -18,7 +19,9 @@
   <title>{site.title}</title>
   <meta name="description" content={site.description ?? "Kelsey Lea's Photography Portfolio"} />
   <meta name="keywords" content={site.keywords?.join(', ') ?? 'Photography'} />
-  <meta property="og:image" content={urlFor(site.bioImage).width(500).height(500).url()} />
+  {#if bioImage && bioImage.asset}
+    <meta property="og:image" content={urlFor(site.bioImage).width(500).height(500).url()} />
+  {/if}
 </svelte:head>
 
 <Header facebookUrl={site.facebookUrl} instagramUrl={site.instagramUrl} />
