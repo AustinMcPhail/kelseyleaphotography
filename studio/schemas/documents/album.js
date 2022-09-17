@@ -1,5 +1,6 @@
 import {BookIcon} from '@sanity/icons'
 
+/** @type {import('@sanity/types').SchemaType} */
 export default {
   name: 'album',
   type: 'document',
@@ -21,7 +22,13 @@ export default {
         source: 'title',
         maxLength: 96
       },
-      validation: (Rule) => Rule.required()
+      validation: (Rule) =>
+        Rule.required().custom((slug) => {
+          if (slug.current.match(/[^a-z0-9-]/)) {
+            return 'Slug must be lowercase and only contain url-safe characters (a-z, 0-9, -). Tap the generate button to create a safe slug.'
+          }
+          return true
+        })
     },
     {
       name: 'quote',

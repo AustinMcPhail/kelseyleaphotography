@@ -5,7 +5,7 @@
     "start": "vite dev --port 3000",
     "build": "vite build",
     "build:prod": "(sleep 30 && vite build)",
-    "postbuild": "svelte-sitemap --domain https://kelseyleaphotography.com -o .vercel_build_output/static",
+    "postbuild": "svelte-sitemap --domain https://kelseyleaphotography.com -o .vercel/output/static",
     "preview": "vite preview",
     "build:sanity": "cd studio && npm run build",
     "start:sanity": "cd studio && npm run start",
