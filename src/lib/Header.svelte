@@ -98,8 +98,7 @@
   }
 
   img {
-    width: 100%;
-    max-width: clamp(200px, 100px, 100vw);
+    width: 150px;
     height: auto;
     filter: invert(100%);
     position: relative;

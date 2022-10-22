@@ -1,6 +1,6 @@
 <script>
   import {onMount} from 'svelte'
-
+  import { fade } from 'svelte/transition'
   import {urlFor} from './sanityClient'
 
   /** @type {any} */
@@ -35,7 +35,7 @@
     }, 500)
   }
 
-  let state = ''
+  $: state = ''
   /** @type {ReturnType<setInterval>|null} */
   let interval
   onMount(() => {
@@ -43,27 +43,34 @@
       next()
     }, 5000)
   })
+
+  function getMobileImage(/** @type {any} */ photo) {
+    return urlFor(photo.image).height(1000).width(500).url();
+  }
+  function getDesktopImage(/** @type {any} */ photo) {
+    return urlFor(photo.image).height(1000).width(1500).url();
+  }
 </script>
 
 <svelte:head>
   {#each photos as photo}
-    <link rel="preload" as="image" href={urlFor(photo.image).height(1000).width(1000).url()}>
+    <link rel="preload" as="image" href={getMobileImage(photo)}>
+    <link rel="preload" as="image" href={getDesktopImage(photo)}>
   {/each}
 </svelte:head>
 
 {#key index}
   <div id="wrapper">
-    <div
-      class={`jumbo ${state}`}
-      style={`
-      --img: url('${urlFor(photos[index].image).height(1000).width(1000)}');
-      --next-img: url('${urlFor(photos[nextIndex].image).height(1000).width(1000)}');
-      --prev-img: url('${urlFor(photos[prevIndex].image).height(1000).width(1000)}');
-      `}
-      role="img"
-      alt={photos[index].image.alt || ''}
-    />
-
+      {#if state == ''}
+        <img out:fade class="mobile" src={getMobileImage(photos[index])} alt={photos[index].image.alt || ''} />
+        <img out:fade class="desktop" src={getDesktopImage(photos[index])} alt={photos[index].image.alt || ''} />
+      {:else if state == 'next'}
+        <img in:fade class="mobile" src={getMobileImage(photos[nextIndex])} alt={photos[nextIndex].image.alt || ''} />
+        <img in:fade class="desktop" src={getDesktopImage(photos[nextIndex])} alt={photos[nextIndex].image.alt || ''} />
+      {:else if state =='prev'}
+        <img in:fade class="mobile" src={getMobileImage(photos[prevIndex])} alt={photos[prevIndex].image.alt || ''} />
+        <img in:fade class="desktop" src={getDesktopImage(photos[prevIndex])} alt={photos[prevIndex].image.alt || ''} />
+      {/if}
     <div id="controls">
       <button
         on:click={() => {
@@ -84,35 +91,39 @@
 
 <style>
   #wrapper {
+    margin-top: var(--space-4);
     position: relative;
-
-    height: 100vh;
+    height: 500px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     box-shadow: inset 0px -10rem 50px 0px rgba(0, 0, 0, 0.5);
   }
 
-  .jumbo {
+  #wrapper img {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+  }
+
+  img.desktop {
+    display: none;
+  }
+
+  img.desktop, img.mobile {
+    object-fit: cover;
     height: 100%;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    background-image: var(--img);
+    width: 100%;
   }
 
-  .next {
-    background-image: var(--next-img);
-    transition: 500ms;
-  }
-  .prev {
-    background-image: var(--prev-img);
-    transition: 500ms;
+  @media (min-width: 768px) {
+    #wrapper {
+      height: 1000px;
+    }
+    img.mobile {
+      display: none;
+    }
+    img.desktop {
+      display: block;
+    }
   }
 
   #wrapper #controls {
@@ -121,8 +132,7 @@
     display: flex;
     align-items: center;
     gap: var(--space-2);
-    margin-bottom: var(--space-6);
-
+    margin-bottom: var(--space-2);
     color: var(--light);
   }
 
@@ -132,11 +142,20 @@
     padding: 0;
     margin: 0;
   }
+
+  @media (min-width: 768px) {
+    #wrapper #controls {
+      margin-bottom: var(--space-6);
+    }
+  }
+
   #wrapper #controls a {
     text-decoration: none;
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
   }
 
   button {
     cursor: pointer;
+    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
   }
 </style>
