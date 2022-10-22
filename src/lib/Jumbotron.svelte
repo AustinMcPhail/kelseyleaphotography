@@ -45,6 +45,12 @@
   })
 </script>
 
+<svelte:head>
+  {#each photos as photo}
+    <link rel="preload" as="image" href={urlFor(photo.image).height(1000).width(1000).url()}>
+  {/each}
+</svelte:head>
+
 {#key index}
   <div id="wrapper">
     <div
