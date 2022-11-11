@@ -98,7 +98,7 @@
   }
 
   img {
-    width: 150px;
+    width: min(150px, 100%);
     height: auto;
     filter: invert(100%);
     position: relative;
