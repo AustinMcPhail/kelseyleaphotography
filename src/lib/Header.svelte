@@ -19,13 +19,13 @@
   </h1>
   <ul>
     <li class="social">
-      <a href={facebookUrl} aria-label="Facebook" target="_blank" rel="noopener">
+      <a href={facebookUrl} aria-label="Facebook" target="_blank" rel="noopener noreferrer">
         <SocialIcon type="fb" />
       </a>
     </li>
     <li class="social" />
     <li class="social">
-      <a href={instagramUrl} aria-label="Instagram" target="_blank" rel="noopener">
+      <a href={instagramUrl} aria-label="Instagram" target="_blank" rel="noopener noreferrer">
         <SocialIcon type="ig" />
       </a>
     </li>

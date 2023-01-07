@@ -23,12 +23,12 @@
     </p>
     <ul id="social">
       <li>
-        <a href={facebookUrl} target="_blank" rel="noopener" aria-label="Facebook">
+        <a href={facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Facebook">
           <SocialIcon type="fb" />
         </a>
       </li>
       <li>
-        <a href={instagramUrl} target="_blank" rel="noopener" aria-label="Instagram">
+        <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <SocialIcon type="ig" />
         </a>
       </li>
