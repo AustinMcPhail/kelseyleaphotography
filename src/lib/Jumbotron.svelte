@@ -1,6 +1,6 @@
 <script>
   import {onMount} from 'svelte'
-  import { fade } from 'svelte/transition'
+  import {fade} from 'svelte/transition'
   import {urlFor} from './sanityClient'
 
   /** @type {any} */
@@ -44,33 +44,34 @@
     }, 5000)
   })
 
-  function getMobileImage(/** @type {any} */ photo) {
-    return urlFor(photo.image).height(1000).width(500).url();
-  }
   function getDesktopImage(/** @type {any} */ photo) {
-    return urlFor(photo.image).height(1000).width(1500).url();
+    return urlFor(photo.image).maxHeight(500).maxWidth(1000).url()
   }
 </script>
 
 <svelte:head>
   {#each photos as photo}
-    <link rel="preload" as="image" href={getMobileImage(photo)}>
-    <link rel="preload" as="image" href={getDesktopImage(photo)}>
+    <link rel="preload" as="image" href={getDesktopImage(photo)} />
   {/each}
 </svelte:head>
 
 {#key index}
   <div id="wrapper">
-      {#if state == ''}
-        <img out:fade class="mobile" src={getMobileImage(photos[index])} alt={photos[index].image.alt || ''} />
-        <img out:fade class="desktop" src={getDesktopImage(photos[index])} alt={photos[index].image.alt || ''} />
-      {:else if state == 'next'}
-        <img in:fade class="mobile" src={getMobileImage(photos[nextIndex])} alt={photos[nextIndex].image.alt || ''} />
-        <img in:fade class="desktop" src={getDesktopImage(photos[nextIndex])} alt={photos[nextIndex].image.alt || ''} />
-      {:else if state =='prev'}
-        <img in:fade class="mobile" src={getMobileImage(photos[prevIndex])} alt={photos[prevIndex].image.alt || ''} />
-        <img in:fade class="desktop" src={getDesktopImage(photos[prevIndex])} alt={photos[prevIndex].image.alt || ''} />
-      {/if}
+    {#if state == ''}
+      <img out:fade src={getDesktopImage(photos[index])} alt={photos[index].image.alt || ''} />
+    {:else if state == 'next'}
+      <img
+        in:fade
+        src={getDesktopImage(photos[nextIndex])}
+        alt={photos[nextIndex].image.alt || ''}
+      />
+    {:else if state == 'prev'}
+      <img
+        in:fade
+        src={getDesktopImage(photos[prevIndex])}
+        alt={photos[prevIndex].image.alt || ''}
+      />
+    {/if}
     <div id="controls">
       <button
         on:click={() => {
@@ -78,7 +79,6 @@
           prev()
         }}>&larr;</button
       >
-      <a rel="prefetch" href="/gallery/{image.album?.album?.slug?.current}">View Album</a>
       <button
         on:click={() => {
           if (interval) clearInterval(interval)
@@ -91,71 +91,46 @@
 
 <style>
   #wrapper {
-    margin-top: var(--space-4);
     position: relative;
     height: 500px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    box-shadow: inset 0px -10rem 50px 0px rgba(0, 0, 0, 0.5);
   }
 
   #wrapper img {
     position: absolute;
-  }
-
-  img.desktop {
-    display: none;
-  }
-
-  img.desktop, img.mobile {
-    object-fit: cover;
     height: 100%;
     width: 100%;
-  }
-
-  @media (min-width: 768px) {
-    #wrapper {
-      height: 1000px;
-    }
-    img.mobile {
-      display: none;
-    }
-    img.desktop {
-      display: block;
-    }
+    object-fit: cover;
   }
 
   #wrapper #controls {
     position: absolute;
-
+    width: 100%;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--space-2);
-    margin-bottom: var(--space-2);
     color: var(--light);
   }
 
   #wrapper #controls button {
-    background: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  @media (min-width: 768px) {
-    #wrapper #controls {
-      margin-bottom: var(--space-6);
-    }
-  }
-
-  #wrapper #controls a {
-    text-decoration: none;
-    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
-  }
-
-  button {
     cursor: pointer;
-    text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+    color: black;
+    background: var(--light);
+    border: none;
+    padding-inline: 5px;
+    padding-block: 2px;
+    border-radius: 5px;
+    border-end-end-radius: 0;
+    border-end-start-radius: 0;
+    opacity: 0.5;
+  }
+  #wrapper #controls button:first-child {
+    border-start-start-radius: 0;
+  }
+  #wrapper #controls button:last-child {
+    border-start-end-radius: 0;
   }
 </style>

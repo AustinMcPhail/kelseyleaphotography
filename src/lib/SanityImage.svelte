@@ -39,7 +39,13 @@
 {/if}
 
 <style>
+  img {
+    height: 100%;
+    width: 100%;
+  }
   button {
+    height: 100%;
+    width: 100%;
     border: none;
     background: none;
     padding: 0;

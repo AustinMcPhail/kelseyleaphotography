@@ -1,170 +1,145 @@
 <script>
-  import SanityImage from './SanityImage.svelte'
+  import {urlFor} from './sanityClient'
 
-  /** @type {any} */
-  export let previewImageOne
-  /** @type {string} */
-  export let title
-  /** @type {string} */
-  export let cost
-  /** @type {string} */
-  export let style
-  /** @type {string} */
-  export let linkToPackage
-  /** @type {string[]} */
-  export let features = []
+  /**
+   * @type {{ cover: any; title: any; cost: any; features: string[]; url: string; }}
+   */
+  export let pack
 </script>
 
-<a
-  rel="prefetch"
-  class={'pack ' + style + `${previewImageOne ? '' : ' no-img'}`}
-  href={linkToPackage}
->
-  <div>
-    <h2>{title}</h2>
-    <h3>{cost}</h3>
-    <ul>
-      {#each features as feature}
-        <li>{feature}</li>
-      {/each}
-    </ul>
-  </div>
+<a class="item" href={pack.url}>
+  {#if pack.cover}
+    <div class="image image-left">
+      <img src={urlFor(pack.cover).width(500).fit('fillmax').url()} alt={pack.cover.alt} />
+    </div>
+  {:else}
+    <div class="empty image image-left">
+      <div class="placeholder-left" />
+    </div>
+  {/if}
 
-  <SanityImage height={500} image={previewImageOne} />
+  <div>
+    <div class="info">
+      <h2>{pack.title}</h2>
+      <h3>{pack.cost}</h3>
+      <ul>
+        {#each pack.features.filter((/** @type {string} */ f) => !!f) as feature}
+          <li>{feature}</li>
+        {/each}
+      </ul>
+    </div>
+  </div>
+  <div class="image image-right">
+    {#if pack.cover}
+      <img src={urlFor(pack.cover).width(500).fit('fillmax').url()} alt={pack.cover.alt} />
+    {:else}
+      <div class="placeholder-right" />
+    {/if}
+  </div>
 </a>
 
 <style>
-  .pack :global(.sanity-img) {
-    width: 200px;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 1000px;
-    shape-outside: ellipse();
-    align-self: center;
-
-    grid-area: img;
-  }
-
-  .pack.light :global(.sanity-img) {
-    border: solid var(--dark) 2px;
-    box-shadow: var(--shadow-25);
-    justify-self: center;
-  }
-
-  .pack.dark :global(.sanity-img) {
-    border: solid var(--light) 2px;
-    box-shadow: var(--shadow);
-    justify-self: center;
-  }
-
-  @media (min-width: 768px) {
-    .pack :global(.sanity-img) {
-      height: 250px;
-      width: 250px;
-    }
+  .empty {
+    display: none;
   }
 
   a {
-    position: relative;
-    box-shadow: var(--shadow-inset-top);
-
-    overflow: hidden;
-
-    display: grid;
-    grid-template-areas:
-      'img'
-      'info';
-
-    padding-block: var(--space-2);
-
-    transition: all 200ms ease-in-out;
-
+    border-top: 1px solid var(--dark);
     text-decoration: none;
-
-    outline: none;
-  }
-  a.no-img {
-    grid-template-areas: '. info .';
-  }
-
-  .dark {
-    background: var(--dark);
-    color: var(--light);
-  }
-
-  .light {
-    background: var(--light);
     color: var(--dark);
+    transition: transform 0.2s ease-in-out;
   }
 
-  @media (min-width: 768px) {
-    a:focus,
-    a:hover {
-      padding-block: var(--space-4);
-    }
-
-    .dark {
-      grid-template-areas: '. info img .';
-    }
-    .no-img.dark {
-      grid-template-areas: '. info .';
-    }
-
-    .light {
-      grid-template-areas: '. img info .';
-    }
-    .no-img.light {
-      grid-template-areas: '. info .';
-    }
-
-    a > div {
-      max-width: var(--content-max-width);
-    }
-
-    a {
-      gap: var(--space-5);
-    }
+  a:hover,
+  a:focus {
+    transform: scale(1.01);
   }
 
-  a:focus,
-  a:hover {
-    outline: none;
-  }
-  a.dark:focus,
-  a.dark:hover {
-    background: var(--dark-hover);
-  }
-  a.light:focus,
-  a.light:hover {
-    background: var(--dark-50);
+  .info {
+    padding-inline: var(--space-1);
   }
 
-  a > div {
-    grid-area: info;
-    max-width: var(--content-max-width);
+  .item {
+    display: grid;
+    grid-template-columns: 1fr;
   }
-
+  .item div.image {
+    height: min(250px, 50vw);
+  }
+  .item div img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .item div.image-right {
+    justify-content: flex-start;
+  }
+  .item div.image-right {
+    justify-content: flex-end;
+  }
+  .item div.image-right img {
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  .item div.placeholder-left {
+    height: 100%;
+    width: 100%;
+    background-color: var(--dark);
+    clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+  }
+  .item div.placeholder-right {
+    height: 100%;
+    width: 100%;
+    background-color: var(--dark);
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
+  }
   h2 {
     font-family: var(--font-accent);
+    font-size: var(--font-larger);
+    margin-block: var(--space-1);
   }
-  h2,
   h3 {
-    position: relative;
-    font-size: var(--font-largest);
+    font-size: var(--font-big);
     font-weight: bold;
-    margin-block: var(--space-2);
-    text-align: center;
-    z-index: 0;
   }
+
   ul {
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: right;
     list-style: circle;
     padding-inline: var(--space-2);
     margin-block: var(--space-2);
+    font-size: small;
   }
   li {
     list-style-position: inside;
+  }
+
+  .image-right {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .empty {
+      display: block;
+    }
+
+    h2 {
+      font-size: var(--font-largest);
+    }
+    h3 {
+      font-size: var(--font-large);
+    }
+    ul {
+      font-size: unset;
+    }
+    .item {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .image-right {
+      display: flex;
+    }
+    .item div.image-left img {
+      clip-path: polygon(0 0, 100% 0, 75% 100%, 0% 100%);
+    }
   }
 </style>

@@ -6,7 +6,7 @@
   export let style = ''
   export let linkToAlbum = ''
 
-  const previewImageOne = urlFor(cover).height(500).url()
+  const previewImageOne = urlFor(cover).height(250).maxWidth(250).url()
 </script>
 
 <a
@@ -16,17 +16,36 @@
   href={linkToAlbum}
 >
   <div>
-    <div>
-      <h2>{title}</h2>
-      {#if quote}
-        <p>{quote}</p>
-      {/if}
-    </div>
+    <h2>{title}</h2>
+    {#if quote}
+      <p>{quote}</p>
+    {/if}
   </div>
   <div class="img" />
 </a>
 
 <style>
+  a {
+    height: 100%;
+    width: 100%;
+
+    position: relative;
+    box-shadow: var(--shadow-inset-top);
+    color: var(--light);
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+
+    transition: all 200ms ease-in-out;
+
+    text-decoration: none;
+
+    outline: none;
+    border-radius: 5px;
+  }
+
   div.img {
     position: absolute;
     z-index: -1;
@@ -58,34 +77,9 @@
     transition: all 200ms ease-in-out;
   }
 
-  a {
-    position: relative;
-    box-shadow: var(--shadow-inset-top);
-    color: var(--light);
-
-    overflow: hidden;
-
-    display: flex;
-    justify-content: center;
-    padding-block: var(--space-6);
-
-    transition: all 200ms ease-in-out;
-
-    text-decoration: none;
-
-    outline: none;
-  }
-
   a:focus,
   a:hover {
     outline: none;
-  }
-
-  @media (min-width: 768px) {
-    a:focus,
-    a:hover {
-      padding-block: var(--space-8);
-    }
   }
 
   a:focus div.img::after,

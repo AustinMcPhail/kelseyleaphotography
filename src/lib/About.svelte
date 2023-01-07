@@ -110,8 +110,6 @@
   }
 
   #bio {
-    box-shadow: var(--shadow-inset-top);
-
     background-image: url('/heart.png');
     background-size: 100%;
     background-repeat: no-repeat;

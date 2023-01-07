@@ -1,4 +1,5 @@
 <script>
+  import PackageList from '$lib/PackageList.svelte'
   import PackagePreview from '../../lib/PackagePreview.svelte'
 
   import PageTitle from '../../lib/PageTitle.svelte'
@@ -7,7 +8,8 @@
 </script>
 
 <PageTitle title="Pricing" quote="These are the moments to remember forever." splash="travel" />
-{#each packages as pack, i}
+<PackageList {packages} />
+<!-- {#each packages as pack, i}
   <PackagePreview
     title={pack.title}
     linkToPackage={pack.url}
@@ -16,4 +18,4 @@
     style={i % 2 === 0 ? 'dark' : 'light'}
     features={pack.features}
   />
-{/each}
+{/each} -->

@@ -22,7 +22,6 @@
     padding-block: var(--space-10);
     padding-inline: var(--space-2);
     color: var(--dark);
-    box-shadow: var(--shadow-25);
 
     background-size: 25%;
     background-repeat: no-repeat;
