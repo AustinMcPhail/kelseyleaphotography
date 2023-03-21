@@ -14,7 +14,7 @@
       <strong> Check out my work</strong> and <strong>get in touch</strong> with <br /> me to schedule
       your shoot today.
     </p>
-    <img class="divider" src="divider.svg" alt="divider" />
+    <img class="divider" src="/divider.svg" alt="divider" />
     <p>
       Message me on <a target="_blank" rel="noopener noreferrer" href={instagramUrl}>Instagram</a> to
       plan your shoot.
