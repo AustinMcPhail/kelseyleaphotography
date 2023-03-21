@@ -5,6 +5,7 @@
   export let inbox = 'bc9e8bcd4dde63a9a56610d20502ab2b'
   /** @type {string[]}  */
   export let blocklist = []
+  export let instagramUrl = ''
 </script>
 
 <section>
@@ -13,58 +14,15 @@
       <strong> Check out my work</strong> and <strong>get in touch</strong> with <br /> me to schedule
       your shoot today.
     </p>
+    <img class="divider" src="divider.svg" alt="divider" />
+    <p>
+      Message me on <a target="_blank" rel="noopener noreferrer" href={instagramUrl}>Instagram</a> to
+      plan your shoot.
+    </p>
   </div>
 </section>
 <section id="contact">
   <div>
-    <form
-      use:enhance={({data, cancel}) => {
-        const email = `${data.get('email')}`
-        const name = `${data.get('name')}`
-        const message = `${data.get('message')}`
-        const emailContainsBlockedWords = blocklist.some(
-          (blocked) =>
-            email.includes(blocked) || name.includes(blocked) || message.includes(blocked)
-        )
-        if (emailContainsBlockedWords) {
-          console.log('blocked', email)
-          cancel()
-          return
-        }
-      }}
-      action="https://formsubmit.co/{inbox}"
-      method="POST"
-      id="contactform"
-    >
-      <label for="name">Name</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="Name" />
-
-      <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
-
-      <label for="message">Message</label>
-      <textarea
-        class="form-control"
-        id="message"
-        name="message"
-        rows="3"
-        placeholder="Write your message here..."
-      />
-
-      <input
-        type="hidden"
-        name="_next"
-        value={`${dev ? 'http://localhost:3000' : 'https://kelseyleaphotography.com'}/thank-you`}
-      />
-      {#if subject}
-        <input type="hidden" name="_subject" value={subject} />
-      {/if}
-      <input type="text" name="_honey" style="display:none" />
-      <input type="hidden" name="_captcha" value="false" />
-      <input type="hidden" name="_template" value="box" />
-      <button type="submit" class="btn btn-primary">Send</button>
-    </form>
-
     <p>Thank you for visiting my small town prairie portfolio!</p>
   </div>
 </section>
@@ -104,7 +62,7 @@
 
   section#contact p {
     margin-block: var(--space-2);
-    font-size: var(--font-larger);
+    font-size: var(--font-large);
     font-family: var(--font-accent);
     text-align: center;
   }
@@ -152,5 +110,12 @@
   form button:active {
     outline: none;
     background: var(--dark-active);
+  }
+
+  .divider {
+    display: block;
+    margin: 0 auto;
+    max-width: 500px;
+    height: 100px;
   }
 </style>

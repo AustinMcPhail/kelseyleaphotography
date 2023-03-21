@@ -19,7 +19,11 @@
       <li><a href="/packages">Packages</a></li>
     </ul>
     <p id="credit">
-      Site by <a href="https://ca.linkedin.com/in/austin-mcphail">McPhail.dev</a>
+      Site by <a
+        href="https://ca.linkedin.com/in/austin-mcphail"
+        target="_blank"
+        rel="noopener noreferrer">McPhail.dev</a
+      >
     </p>
     <ul id="social">
       <li>

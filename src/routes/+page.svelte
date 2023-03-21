@@ -19,5 +19,5 @@
     bottomTitle={$siteStore.bio2Title}
     image={$siteStore.bioImage}
   />
-  <Contact blocklist={$siteStore.blocklist ?? []} />
+  <Contact instagramUrl={$siteStore.instagramUrl ?? ''} blocklist={$siteStore.blocklist ?? []} />
 </main>
