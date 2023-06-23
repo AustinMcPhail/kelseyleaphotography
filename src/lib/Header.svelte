@@ -14,13 +14,33 @@
 <header>
   <nav>
     <div class="nav">
-      <a href="/gallery">Gallery</a>
+      <div class="gallery">
+        <a href="/gallery">Gallery</a>
+        <div class="flower-container">
+          <img
+            class="flower"
+            class:active={$page.url.pathname === '/gallery'}
+            src="/flower.svg"
+            alt=""
+          />
+        </div>
+      </div>
       <h1>
         <a href="/" id="logo">
           <img src="/header-logo.png" alt="Kelsey Lea Photography" />
         </a>
       </h1>
-      <a href="/packages">Packages</a>
+      <div class="packages">
+        <a href="/packages" class="packages">Packages</a>
+        <div class="flower-container">
+          <img
+            class="flower"
+            class:active={$page.url.pathname === '/packages'}
+            src="/flower.svg"
+            alt=""
+          />
+        </div>
+      </div>
     </div>
     <div class="socials">
       <a href={facebookUrl} aria-label="Facebook" target="_blank" rel="noopener noreferrer">
@@ -34,6 +54,48 @@
 </header>
 
 <style>
+  .gallery,
+  .packages {
+    display: flex;
+  }
+  .gallery .flower-container,
+  .packages .flower-container {
+    pointer-events: none;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+  .gallery .flower-container .flower,
+  .packages .flower-container .flower {
+    width: 75px;
+    height: auto;
+    position: absolute;
+    transition: opacity 0.2s ease-in-out;
+    opacity: 0;
+  }
+
+  .gallery .flower-container .flower {
+    right: -10px;
+    top: 50%;
+  }
+  .packages .flower-container .flower {
+    right: 10px;
+    top: 50%;
+    transform: scaleX(-1);
+  }
+
+  .gallery a:hover + .flower-container .flower,
+  .gallery a:focus + .flower-container .flower,
+  .packages a:hover + .flower-container .flower,
+  .packages a:focus + .flower-container .flower {
+    opacity: 0.25;
+  }
+
+  .gallery .flower-container .flower.active,
+  .packages .flower-container .flower.active {
+    opacity: 1;
+  }
+
   nav {
     padding-block: var(--space-1);
   }
