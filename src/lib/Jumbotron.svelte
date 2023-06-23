@@ -49,12 +49,6 @@
   }
 </script>
 
-<svelte:head>
-  {#each photos as photo}
-    <link rel="preload" as="image" href={getDesktopImage(photo)} />
-  {/each}
-</svelte:head>
-
 {#key index}
   <div id="wrapper">
     {#if state == ''}
