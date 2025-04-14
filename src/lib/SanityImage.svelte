@@ -1,27 +1,47 @@
 <script>
+  import { createBubbler } from 'svelte/legacy';
+
+  const bubble = createBubbler();
   import {urlFor} from './sanityClient'
 
-  /** @type {any} */
-  export let image
-  export let maxWidth = 1200
-  export let maxHeight = 1200
-  /** @type {string|undefined} */
-  export let alt = undefined
-  export let styles = ''
-  export let classes = ''
-  export let id = ''
+  
+  
 
-  /** @type {number} */
-  export let height = 0
+  
 
-  /** @type {any} */
-  export let fit = 'fillmax'
+  
 
-  export let clickable = false
+  /**
+   * @typedef {Object} Props
+   * @property {any} image
+   * @property {number} [maxWidth]
+   * @property {number} [maxHeight]
+   * @property {string|undefined} [alt]
+   * @property {string} [styles]
+   * @property {string} [classes]
+   * @property {string} [id]
+   * @property {number} [height]
+   * @property {any} [fit]
+   * @property {boolean} [clickable]
+   */
+
+  /** @type {Props} */
+  let {
+    image,
+    maxWidth = 1200,
+    maxHeight = 1200,
+    alt = undefined,
+    styles = '',
+    classes = '',
+    id = '',
+    height = 0,
+    fit = 'fillmax',
+    clickable = false
+  } = $props();
 </script>
 
 {#if image}
-  <button on:click disabled={!clickable}>
+  <button onclick={bubble('click')} disabled={!clickable}>
     <img
       {id}
       loading="lazy"

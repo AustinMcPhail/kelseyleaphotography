@@ -1,10 +1,14 @@
 <script>
   import AlbumPreview from './AlbumPreview.svelte'
 
+  
   /**
-   * @type {any[]}
+   * @typedef {Object} Props
+   * @property {any[]} [albums]
    */
-  export let albums = []
+
+  /** @type {Props} */
+  let { albums = [] } = $props();
 </script>
 
 <div class="grid">

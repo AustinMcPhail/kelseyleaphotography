@@ -1,9 +1,15 @@
 <script>
-  /** @type {string[]} */
-  export let addons = []
-  export let blurb = ''
-  $: firstHalfOfAddons = addons.slice(0, Math.ceil(addons.length / 2))
-  $: secondHalfOfAddons = addons.slice(Math.ceil(addons.length / 2))
+  
+  /**
+   * @typedef {Object} Props
+   * @property {string[]} [addons]
+   * @property {string} [blurb]
+   */
+
+  /** @type {Props} */
+  let { addons = [], blurb = '' } = $props();
+  let firstHalfOfAddons = $derived(addons.slice(0, Math.ceil(addons.length / 2)))
+  let secondHalfOfAddons = $derived(addons.slice(Math.ceil(addons.length / 2)))
 </script>
 
 <section>
@@ -68,7 +74,7 @@
     padding-inline: var(--space-2);
     list-style-position: inside;
   }
-  ul:is(:last-child) {
+  ul:is(:global(:last-child)) {
     margin-top: 1rem;
   }
 

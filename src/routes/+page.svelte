@@ -6,7 +6,7 @@
   import About from '../lib/About.svelte'
   import {siteStore} from '../lib/store'
 
-  export let data
+  let { data } = $props();
   const photos = data.photos
 </script>
 

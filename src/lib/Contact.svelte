@@ -1,11 +1,22 @@
 <script>
   import {dev} from '$app/environment'
   import {enhance} from '$app/forms'
-  export let subject = 'Photography Shoot'
-  export let inbox = 'bc9e8bcd4dde63a9a56610d20502ab2b'
-  /** @type {string[]}  */
-  export let blocklist = []
-  export let instagramUrl = ''
+  
+  /**
+   * @typedef {Object} Props
+   * @property {string} [subject]
+   * @property {string} [inbox]
+   * @property {string[]} [blocklist]
+   * @property {string} [instagramUrl]
+   */
+
+  /** @type {Props} */
+  let {
+    subject = 'Photography Shoot',
+    inbox = 'bc9e8bcd4dde63a9a56610d20502ab2b',
+    blocklist = [],
+    instagramUrl = ''
+  } = $props();
 </script>
 
 <section>
@@ -54,7 +65,7 @@
         name="message"
         rows="3"
         placeholder="Write your message here..."
-      />
+></textarea>
 
       <input
         type="hidden"

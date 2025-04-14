@@ -3,7 +3,7 @@
   import PackagePreview from '../../lib/PackagePreview.svelte'
 
   import PageTitle from '../../lib/PageTitle.svelte'
-  export let data
+  let { data } = $props();
   const packages = data.packages ?? []
 </script>
 

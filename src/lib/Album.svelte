@@ -3,11 +3,17 @@
   import {browser} from '$app/environment'
 
   import SanityImage from './SanityImage.svelte'
-  /** @type {any[]} */
-  export let photos = []
+  
+  /**
+   * @typedef {Object} Props
+   * @property {any[]} [photos]
+   */
+
+  /** @type {Props} */
+  let { photos = [] } = $props();
 
   /** @type {any} */
-  let fullscreened
+  let fullscreened = $state()
 
   /** @type {(...a: any) => any} */
   function handleImageClicked(p) {
@@ -50,7 +56,7 @@
     <div class="fs-image-container">
       <SanityImage maxHeight={1000} image={fullscreened.image} />
     </div>
-    <button on:click={closeFullscreened}>Close</button>
+    <button onclick={closeFullscreened}>Close</button>
   </div>
 {/if}
 

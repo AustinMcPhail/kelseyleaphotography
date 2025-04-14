@@ -1,7 +1,7 @@
 <script>
   import Package from '../../../lib/Package.svelte'
   import PageTitle from '../../../lib/PageTitle.svelte'
-  export let data
+  let { data } = $props();
   const title = data.title
   const quote = data.quote
   const splash = data.splash

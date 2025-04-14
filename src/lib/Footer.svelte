@@ -1,8 +1,14 @@
 <script>
   import SocialIcon from './SocialIcon.svelte'
 
-  export let facebookUrl = ''
-  export let instagramUrl = ''
+  /**
+   * @typedef {Object} Props
+   * @property {string} [facebookUrl]
+   * @property {string} [instagramUrl]
+   */
+
+  /** @type {Props} */
+  let { facebookUrl = '', instagramUrl = '' } = $props();
 </script>
 
 <footer>

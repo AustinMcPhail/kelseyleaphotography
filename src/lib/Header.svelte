@@ -1,14 +1,20 @@
 <script>
   import SocialIcon from './SocialIcon.svelte'
-  import {page} from '$app/stores'
+  // import {page} from '$app/state'
 
   let menuOpen = false
-  export let facebookUrl = ''
-  export let instagramUrl = ''
+  /**
+   * @typedef {Object} Props
+   * @property {string} [facebookUrl]
+   * @property {string} [instagramUrl]
+   */
 
-  page.subscribe(() => {
-    menuOpen = false
-  })
+  /** @type {Props} */
+  let { facebookUrl = '', instagramUrl = '' } = $props();
+
+  // page.subscribe(() => {
+  //   menuOpen = false
+  // })
 </script>
 
 <header>
@@ -16,14 +22,14 @@
     <div class="nav">
       <div class="gallery">
         <a href="/gallery">Gallery</a>
-        <div class="flower-container">
+        <!-- <div class="flower-container">
           <img
             class="flower"
-            class:active={$page.url.pathname === '/gallery'}
+            class:active={page.url.pathname === '/gallery'}
             src="/flower.svg"
             alt=""
           />
-        </div>
+        </div> -->
       </div>
       <h1>
         <a href="/" id="logo">
@@ -32,14 +38,14 @@
       </h1>
       <div class="packages">
         <a href="/packages" class="packages">Packages</a>
-        <div class="flower-container">
+        <!-- <div class="flower-container">
           <img
             class="flower"
-            class:active={$page.url.pathname === '/packages'}
+            class:active={page.url.pathname === '/packages'}
             src="/flower.svg"
             alt=""
           />
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="socials">

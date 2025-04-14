@@ -1,8 +1,19 @@
 <script>
-  export let title = ''
-  export let quote = ''
-  export let subtitle = ''
-  export let splash = 'heart'
+  /**
+   * @typedef {Object} Props
+   * @property {string} [title]
+   * @property {string} [quote]
+   * @property {string} [subtitle]
+   * @property {string} [splash]
+   */
+
+  /** @type {Props} */
+  let {
+    title = '',
+    quote = '',
+    subtitle = '',
+    splash = 'heart'
+  } = $props();
 </script>
 
 <section class={splash ?? 'heart'}>

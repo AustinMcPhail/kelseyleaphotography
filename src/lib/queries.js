@@ -24,7 +24,7 @@ export function getJumbotronPhotosQuery() {
     }
   }`
 }
-/** @type {(p: string) => string} */
+/** @type {(p?: string) => string} */
 export function getAlbumsQuery(extraFilter) {
   return /* groq */ `*[
     _type == "album" &&
@@ -50,7 +50,7 @@ export function getAlbumQuery(album) {
     splash,
   }`
 }
-/** @type {(p: string) => string} */
+/** @type {(p?: string) => string} */
 export function getPackagesQuery(extraFilter) {
   return /* groq */ `*[
     _type == "package" &&

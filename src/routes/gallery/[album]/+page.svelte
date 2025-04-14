@@ -2,7 +2,7 @@
   import Album from '../../../lib/Album.svelte'
   import PageTitle from '../../../lib/PageTitle.svelte'
 
-  export let data
+  let { data } = $props();
 
   const name = data.name
   const photos = data.photos

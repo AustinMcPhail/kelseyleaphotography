@@ -5,11 +5,11 @@
   import Transition from '../lib/Transition.svelte'
   import {siteStore} from '../lib/store'
   import {urlFor} from '../lib/sanityClient'
+  import { page } from '$app/state';
 
-  export const prerender = true
+  let { data, children } = $props();
 
-  export let data
-  const url = data.url
+  const url = page.url.pathname
   const site = data.site
   const bioImage = data.bioImage
   $siteStore = site
@@ -24,11 +24,11 @@
   {/if}
 </svelte:head>
 
-<Header facebookUrl={site.facebookUrl} instagramUrl={site.instagramUrl} />
+<Header facebookUrl={''} instagramUrl={''} />
 <div>
   <main>
     <Transition {url}>
-      <slot />
+      {@render children?.()}
     </Transition>
   </main>
   <Footer facebookUrl={site.facebookUrl} instagramUrl={site.instagramUrl} />

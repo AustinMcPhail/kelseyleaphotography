@@ -1,5 +1,11 @@
 <script>
-  export let type = 'fb' // fb or ig
+  /**
+   * @typedef {Object} Props
+   * @property {string} [type] - fb or ig
+   */
+
+  /** @type {Props} */
+  let { type = 'fb' } = $props();
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">

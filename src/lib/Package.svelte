@@ -6,22 +6,37 @@
   import PackageFeatures from './PackageFeatures.svelte'
   import Contact from './Contact.svelte'
   import {siteStore} from '$lib/store'
-  /** @type {any} */
-  export let previewImageOne
-  /** @type {any} */
-  export let previewImageTwo
-  /** @type {string} */
-  export let cost
-  /** @type {string[]} */
-  export let features = []
-  /** @type {string[]} */
-  export let addons = []
-  export let blurb = ''
-  /** @type {{question: string, answer: string}[]} */
-  export let faq = []
+  
+  
+  
+  
+  
+  
 
-  /** @type {string} */
-  export let title
+  
+  /**
+   * @typedef {Object} Props
+   * @property {any} previewImageOne
+   * @property {any} previewImageTwo
+   * @property {string} cost
+   * @property {string[]} [features]
+   * @property {string[]} [addons]
+   * @property {string} [blurb]
+   * @property {{question: string, answer: string}[]} [faq]
+   * @property {string} title
+   */
+
+  /** @type {Props} */
+  let {
+    previewImageOne,
+    previewImageTwo,
+    cost,
+    features = [],
+    addons = [],
+    blurb = '',
+    faq = [],
+    title
+  } = $props();
 </script>
 
 <PackageFeatures {previewImageOne} {previewImageTwo} {cost} {features} />

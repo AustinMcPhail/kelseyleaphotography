@@ -1,13 +1,24 @@
 <script>
   import {urlFor} from './sanityClient'
-  /** @type {any} */
-  export let previewImageOne
-  /** @type {any} */
-  export let previewImageTwo
-  /** @type {string} */
-  export let cost
-  /** @type {string[]} */
-  export let features = []
+  
+  
+  
+  
+  /**
+   * @typedef {Object} Props
+   * @property {any} previewImageOne
+   * @property {any} previewImageTwo
+   * @property {string} cost
+   * @property {string[]} [features]
+   */
+
+  /** @type {Props} */
+  let {
+    previewImageOne,
+    previewImageTwo,
+    cost,
+    features = []
+  } = $props();
 
   const previewImageOneUrl = previewImageOne ? urlFor(previewImageOne).height(500).url() : ''
   const previewImageTwoUrl = previewImageTwo ? urlFor(previewImageTwo).height(500).url() : ''
@@ -15,7 +26,7 @@
 
 <section class="features" class:hasPreview={previewImageOne && previewImageTwo}>
   {#if previewImageOneUrl}
-    <div class="img" style={`--previewImage: url("${previewImageOneUrl}");`} />
+    <div class="img" style={`--previewImage: url("${previewImageOneUrl}");`}></div>
   {/if}
   <div class="content">
     <p>Starting at</p>
@@ -27,7 +38,7 @@
     </ul>
   </div>
   {#if previewImageTwoUrl}
-    <div class="img" style={`--previewImage: url("${previewImageTwoUrl}");`} />
+    <div class="img" style={`--previewImage: url("${previewImageTwoUrl}");`}></div>
   {/if}
 </section>
 

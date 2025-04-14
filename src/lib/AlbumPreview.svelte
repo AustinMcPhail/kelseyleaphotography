@@ -1,10 +1,22 @@
 <script>
   import {urlFor} from './sanityClient'
-  export let cover = ''
-  export let title = ''
-  export let quote = ''
-  export let style = ''
-  export let linkToAlbum = ''
+  /**
+   * @typedef {Object} Props
+   * @property {string} [cover]
+   * @property {string} [title]
+   * @property {string} [quote]
+   * @property {string} [style]
+   * @property {string} [linkToAlbum]
+   */
+
+  /** @type {Props} */
+  let {
+    cover = '',
+    title = '',
+    quote = '',
+    style = '',
+    linkToAlbum = ''
+  } = $props();
 
   const previewImageOne = urlFor(cover).height(250).maxWidth(250).url()
 </script>
@@ -21,7 +33,7 @@
       <p>{quote}</p>
     {/if}
   </div>
-  <div class="img" />
+  <div class="img"></div>
 </a>
 
 <style>

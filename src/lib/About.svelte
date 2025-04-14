@@ -1,14 +1,26 @@
 <script>
   import SanityImage from './SanityImage.svelte'
 
-  export let topTitle = ''
-  export let topText = ''
 
-  export let bottomTitle = ''
-  export let bottomText = ''
 
-  /** @type {any} */
-  export let image
+  
+  /**
+   * @typedef {Object} Props
+   * @property {string} [topTitle]
+   * @property {string} [topText]
+   * @property {string} [bottomTitle]
+   * @property {string} [bottomText]
+   * @property {any} image
+   */
+
+  /** @type {Props} */
+  let {
+    topTitle = '',
+    topText = '',
+    bottomTitle = '',
+    bottomText = '',
+    image
+  } = $props();
 </script>
 
 <div id="about">

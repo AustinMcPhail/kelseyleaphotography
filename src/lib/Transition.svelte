@@ -1,12 +1,19 @@
 <script>
   import {fade} from 'svelte/transition'
-  export let url = ''
+  /**
+   * @typedef {Object} Props
+   * @property {string} [url]
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let { url = '', children } = $props();
 </script>
 
 <div class="transition-outer">
   {#key url}
     <div class="transition-inner" in:fade|global={{duration: 250}} out:fade|global={{duration: 250}}>
-      <slot />
+      {@render children?.()}
     </div>
   {/key}
 </div>

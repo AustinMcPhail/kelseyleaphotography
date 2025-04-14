@@ -1,10 +1,14 @@
 <script>
   import {urlFor} from './sanityClient'
 
+  
   /**
-   * @type {{ cover: any; title: any; cost: any; features: string[]; url: string; }}
+   * @typedef {Object} Props
+   * @property {{ cover: any; title: any; cost: any; features: string[]; url: string; }} pack
    */
-  export let pack
+
+  /** @type {Props} */
+  let { pack } = $props();
 </script>
 
 <a class="item" href={pack.url}>
@@ -14,7 +18,7 @@
     </div>
   {:else}
     <div class="empty image image-left">
-      <div class="placeholder-left" />
+      <div class="placeholder-left"></div>
     </div>
   {/if}
 
@@ -33,7 +37,7 @@
     {#if pack.cover}
       <img src={urlFor(pack.cover).width(500).fit('fillmax').url()} alt={pack.cover.alt} />
     {:else}
-      <div class="placeholder-right" />
+      <div class="placeholder-right"></div>
     {/if}
   </div>
 </a>

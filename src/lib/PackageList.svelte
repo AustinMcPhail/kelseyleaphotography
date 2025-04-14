@@ -1,10 +1,14 @@
 <script>
   import PackagePreview from './PackagePreview.svelte'
 
+  
   /**
-   * @type {any[]}
+   * @typedef {Object} Props
+   * @property {any[]} [packages]
    */
-  export let packages = []
+
+  /** @type {Props} */
+  let { packages = [] } = $props();
 </script>
 
 <div class="list">

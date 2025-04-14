@@ -2,10 +2,16 @@
   import {onDestroy, onMount} from 'svelte'
 
   import Transition from './Transition.svelte'
-  /** @type {{question: string, answer: string}[]} */
-  export let qas = []
-  let answer = ''
-  let question = ''
+  
+  /**
+   * @typedef {Object} Props
+   * @property {{question: string, answer: string}[]} [qas]
+   */
+
+  /** @type {Props} */
+  let { qas = [] } = $props();
+  let answer = $state('')
+  let question = $state('')
   /** @type {ReturnType<setInterval>|null} */
   let interval
   onMount(() => {
@@ -36,14 +42,14 @@
     <h4>Frequently Asked <br /> Questions</h4>
     <div class="questions">
       {#each qas as qa}
-        <button on:click={questionClicked(qa, true)} class:active={question === qa.question}>
+        <button onclick={questionClicked(qa, true)} class:active={question === qa.question}>
           {qa.question}
         </button>
       {/each}
     </div>
     {#if answer}
       <Transition url={answer}>
-        <p class="answer" on:scroll={() => questionClicked({question, answer}, true)}>
+        <p class="answer" onscroll={() => questionClicked({question, answer}, true)}>
           {answer}
         </p>
       </Transition>

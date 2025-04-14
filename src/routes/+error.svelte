@@ -1,4 +1,6 @@
 <script>
+  import { preventDefault } from 'svelte/legacy';
+
   import PageTitle from '../lib/PageTitle.svelte'
 </script>
 
@@ -11,7 +13,7 @@
   <a
     rel="prefetch"
     href="#return"
-    on:click|preventDefault={() => history.go(-1)}
+    onclick={preventDefault(() => history.go(-1))}
     class="btn btn-primary">Return</a
   >
 </div>
