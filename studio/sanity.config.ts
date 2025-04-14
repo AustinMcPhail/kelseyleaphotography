@@ -2,13 +2,14 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
+import {projectId, dataset} from '../sanity.json'
 
 export default defineConfig({
   name: 'default',
   title: 'kelseyleaphotography',
 
-  projectId: 'tgdufnkq',
-  dataset: 'develop',
+  projectId,
+  dataset,
 
   plugins: [structureTool(), visionTool()],
 
