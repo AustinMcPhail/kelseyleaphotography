@@ -52,16 +52,16 @@
 {#key index}
   <div id="wrapper">
     {#if state == ''}
-      <img out:fade src={getDesktopImage(photos[index])} alt={photos[index].image.alt || ''} />
+      <img out:fade|global src={getDesktopImage(photos[index])} alt={photos[index].image.alt || ''} />
     {:else if state == 'next'}
       <img
-        in:fade
+        in:fade|global
         src={getDesktopImage(photos[nextIndex])}
         alt={photos[nextIndex].image.alt || ''}
       />
     {:else if state == 'prev'}
       <img
-        in:fade
+        in:fade|global
         src={getDesktopImage(photos[prevIndex])}
         alt={photos[prevIndex].image.alt || ''}
       />

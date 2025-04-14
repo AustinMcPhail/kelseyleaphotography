@@ -6,7 +6,10 @@ dns.setDefaultResultOrder('verbatim') // Sets vite to localhost:<port> instead o
 const server = {
   origin: 'localhost',
   fs: {
-    allow: ['studio']
+    allow: [
+      'studio',
+      'sanity.json'
+    ]
   }
 }
 

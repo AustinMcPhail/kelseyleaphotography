@@ -5,7 +5,7 @@
 
 <div class="transition-outer">
   {#key url}
-    <div class="transition-inner" in:fade={{duration: 250}} out:fade={{duration: 250}}>
+    <div class="transition-inner" in:fade|global={{duration: 250}} out:fade|global={{duration: 250}}>
       <slot />
     </div>
   {/key}
