@@ -1,9 +1,11 @@
-export default {
+import { defineField, defineType } from "sanity";
+
+export const AlbumReference = defineType({
   name: 'albumReference',
   type: 'object',
   title: 'Album reference',
   fields: [
-    {
+    defineField({
       name: 'album',
       type: 'reference',
       to: [
@@ -11,7 +13,7 @@ export default {
           type: 'album'
         }
       ]
-    }
+    })
   ],
   preview: {
     select: {
@@ -19,4 +21,4 @@ export default {
       cover: 'album.cover.asset'
     }
   }
-}
+});

@@ -1,12 +1,13 @@
-import {ImageIcon} from '@sanity/icons'
+import { ImageIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
-export default {
+export const Photo = defineType({
   name: 'photo',
   type: 'document',
   title: 'Photo',
   icon: ImageIcon,
   fields: [
-    {
+    defineField({
       name: 'image',
       type: 'image',
       title: 'Photo',
@@ -20,19 +21,17 @@ export default {
           title: 'Alternative text',
           description: 'Important for SEO and accessiblity.',
           validation: (Rule) => Rule.error('You have to fill out the alternative text.').required(),
-          options: {
-            isHighlighted: true
-          }
         }
-      ]
-    },
-    {
+      ],
+      readOnly: false
+    }),
+    defineField({
       name: 'album',
       title: 'album',
       type: 'albumReference',
       validation: (Rule) => Rule.error('You have to select an Album.').required()
-    },
-    {
+    }),
+    defineField({
       name: 'publishedAt',
       type: 'datetime',
       title: 'Published at',
@@ -41,13 +40,13 @@ export default {
         dateFormat: 'YYYY-MM-DD',
         timeFormat: 'h:mm a'
       }
-    },
-    {
+    }),
+    defineField({
       name: 'showOnHome',
       type: 'boolean',
       title: 'Display on Home Page',
       description: 'Photos from this album will be shown on the Homepage.'
-    }
+    })
   ],
   initialValue: {
     publishedAt: new Date().toISOString(),
@@ -77,4 +76,4 @@ export default {
       }
     }
   }
-}
+});
