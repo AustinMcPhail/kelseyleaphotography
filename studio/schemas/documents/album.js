@@ -60,12 +60,7 @@ export default {
     }
   ],
   initialValue: async () => {
-    const res = await fetch('https://type.fit/api/quotes')
-    let data = []
-    if (res.ok) data = await res.json()
     return {
-      splash: 'heart',
-      quote: data ? data[Math.floor(Math.random() * data.length)].text : '',
       showOnHome: true
     }
   }
